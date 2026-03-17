@@ -42,9 +42,6 @@ def find_only_options(board):
         if option_found == False:
             break
 
-
-
-
 def find_best_cell(board):
     best = None
     best_count = 10
@@ -57,5 +54,4 @@ def find_best_cell(board):
                 best_count = cell["numOfOptions"]
 
     return best
-
 
