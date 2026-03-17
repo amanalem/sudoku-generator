@@ -42,43 +42,6 @@ def find_naked_singles(board):
         if not option_found:
             break
 
-def find_row_singles(board):
-    for row in range(9):
-        cells = get_row(board, row)
-        for number in range(1, 10):
-            possible_cells = [i for i, cell in enumerate(cells) if number in cell["options"] and cell["answer"] is None]
-            if len(possible_cells) == 1:
-                column = possible_cells[0]
-                board[row][column]["answer"] = number
-                board[row][column]["options"] = [number]
-                propogate(board, row, column, number)
-
-def find_column_singles(board):
-    for column in range(9):
-        cells = get_column(board, column)
-        for number in range(1, 10):
-            possible_cells = [i for i, cell in enumerate(cells) if number in cell["options"] and cell["answer"] is None]
-            if len(possible_cells) == 1:
-                row = possible_cells[0]
-                board[row][column]["answer"] = number
-                board[row][column]["options"] = [number]
-                propogate(board, row, column, number)
-
-def find_box_singles(board):
-    for box_row in range(3):
-        for box_column in range(3):
-            cells = get_box(board, box_row * 3, box_column * 3)
-            for number in range(1, 10):
-                possible_cells = [(i, cell) for i, cell in enumerate(cells) if number in cell["options"] and cell["answer"] is None]
-                if len(possible_cells) == 1:
-                    index = possible_cells[0][0]
-                    row = box_row * 3 + index // 3
-                    column = box_column * 3 + index % 3
-                    board[row][column]["answer"] = number
-                    board[row][column]["options"] = [number]
-                    propogate(board, row, column, number)
-
-
 def find_hidden_singles(board):
     while True:
         repeat = False
