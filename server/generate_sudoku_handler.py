@@ -28,6 +28,14 @@ def propogate(board, row, column, answer):
         if answer in cell["options"]:
             cell["options"].remove(answer)
 
+def count_solved(board):
+    count = 0
+    for row in range(9):
+        for column in range(9):
+            if board[row][column]["answer"] is not None:
+                count += 1
+    return count
+
 def find_naked_singles(board):
     while True:
         option_found = False
