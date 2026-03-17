@@ -28,19 +28,21 @@ def propogate(board, row, column, answer):
         if answer in cell["options"]:
             cell["options"].remove(answer)
 
-def find_only_options(board):
+def find_singles(board):
     while True:
         option_found = False
         for row in range(9):
             for column in range(9):
                 cell = board[row][column]
-                if cell["numOfOptions"] == 1 and cell["answer"] == None:
+                if cell["numOfOptions"]() == 1 and cell["answer"] is None:
                     answer = cell["options"][0]
                     board[row][column]["answer"] = answer
                     propogate(board, row, column, answer)
                     option_found = True
         if option_found == False:
             break
+
+
 
 def find_best_cell(board):
     best = None
@@ -49,9 +51,8 @@ def find_best_cell(board):
     for row in range(9):
         for column in range(9):
             cell = board[row][column]
-            if cell["answer"] == "" and cell["numOfOptions"] < best_count:
+            if cell["answer"] == None and cell["numOfOptions"] < best_count:
                 best = (row, column)
                 best_count = cell["numOfOptions"]
 
     return best
-

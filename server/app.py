@@ -11,7 +11,7 @@ def get_puzzle():
 
     board = [[make_cell() for _ in range(9)] for _ in range(9)]
 
-    puzzle = 
+    puzzle = [[board[row][column]["answer"] for column in range(9)] for row in range(9)]
     return jsonify({"puzzle": puzzle})
 
 if __name__ == '__main__':
