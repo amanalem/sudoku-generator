@@ -119,7 +119,8 @@ def has_conflict(board):
 
 def save_state(board, states):
     state = [[{"options": cell["options"][:], "answer": cell["answer"]} for cell in row] for row in board]
-    return state.append(states)
+    states.append(state)
+    return states
 
 def restore_state(board, states):
     state = states.pop()
@@ -128,7 +129,9 @@ def restore_state(board, states):
             board[row][column]["options"] = state[row][column]["options"][:]
             board[row][column]["answer"] = state[row][column]["answer"]
             
-def backtrack(board):
+def backtrack(board, states):
+    if has_conflict(board):
+        restore_state(board, states)
 
 def generate_sudoku():
 
