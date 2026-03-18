@@ -8,8 +8,6 @@ def make_cell():
     cell["numOfOptions"] = lambda: len(cell['options'])
     return cell
 
-board = [[make_cell() for _ in range(9)] for _ in range(9)]
-
 def get_row(board, row):
     return board[row]
 
@@ -102,8 +100,7 @@ def find_best_cell(board):
                 best_count = cell["numOfOptions"]()
     return best
 
-def set_cell(board, row, column):
-    answer = random.choice(board[row][column]["options"])
+def make_guess(board, row, column, answer):
     board[row][column]["answer"] = answer
     board[row][column]["options"] = [answer]
     propagate(board, row, column, answer)
@@ -129,12 +126,29 @@ def restore_state(board, states):
             board[row][column]["options"] = state[row][column]["options"][:]
             board[row][column]["answer"] = state[row][column]["answer"]
             
+
 def backtrack(board, states):
+    find_all_singles(board)
     if has_conflict(board):
+        return False
+    if count_solved(board) == 81:
+        return True
+    cell = find_best_cell(board)
+    row, column = cell
+    options = board[row][column]["options"][:]
+    random.shuffle(options)
+    for option in options:
+        save_state(board)
+        make_guess(board, row, column, option)
+        if backtrack(board, states):
+            return True
         restore_state(board, states)
+    return False
+
         
 
 def generate_sudoku():
 
     board_states = []
     board = [[make_cell() for _ in range(9)] for _ in range(9)]
+    
