@@ -21,7 +21,7 @@ def get_box(board, row, column):
     box_column = (column // 3) * 3
     return [board[box_row + r][box_column + c] for r in range(3) for c in range(3)]
 
-def propogate(board, row, column, answer):
+def propagate(board, row, column, answer):
     related_cells = get_row(board, row) + get_column(board, column) + get_box(board, row, column)
 
     for cell in related_cells:
@@ -43,7 +43,7 @@ def find_naked_singles(board):
             if cell["numOfOptions"]() == 1 and cell["answer"] is None:
                 answer = cell["options"][0]
                 board[row][column]["answer"] = answer
-                propogate(board, row, column, answer)
+                propagate(board, row, column, answer)
 
 
 def find_hidden_singles(board):
@@ -56,7 +56,7 @@ def find_hidden_singles(board):
                 column = possible_cells[0]
                 board[row][column]["answer"] = number
                 board[row][column]["options"] = [number]
-                propogate(board, row, column, number)
+                propagate(board, row, column, number)
     # Second we look for hidden column singles
     for column in range(9):
         cells = get_column(board, column)
@@ -66,7 +66,7 @@ def find_hidden_singles(board):
                 row = possible_cells[0]
                 board[row][column]["answer"] = number
                 board[row][column]["options"] = [number]
-                propogate(board, row, column, number)
+                propagate(board, row, column, number)
     # Third we look for hidden box singles
     for box_row in range(3):
         for box_column in range(3):
@@ -79,7 +79,7 @@ def find_hidden_singles(board):
                     column = box_column * 3 + index % 3
                     board[row][column]["answer"] = number
                     board[row][column]["options"] = [number]
-                    propogate(board, row, column, number)
+                    propagate(board, row, column, number)
 
 def find_all_singles(board):
     while True:
@@ -97,8 +97,15 @@ def find_best_cell(board):
     for row in range(9):
         for column in range(9):
             cell = board[row][column]
-            if cell["answer"] == None and cell["numOfOptions"] < best_count:
+            if cell["answer"] is None and cell["numOfOptions"]() < best_count:
                 best = (row, column)
-                best_count = cell["numOfOptions"]
-
+                best_count = cell["numOfOptions"]()
     return best
+
+def set_cell(board, row, column):
+    answer = random.choice(board[row][column]["options"])
+    board[row][column]["answer"] = answer
+    board[row][column]["options"] = [answer]
+    propagate(board, row, column, answer)
+    return answer
+
