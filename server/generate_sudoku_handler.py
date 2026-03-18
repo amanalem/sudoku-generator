@@ -132,6 +132,7 @@ def restore_state(board, states):
 def backtrack(board, states):
     if has_conflict(board):
         restore_state(board, states)
+        
 
 def generate_sudoku():
 
