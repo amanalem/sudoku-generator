@@ -149,6 +149,9 @@ def backtrack(board, states):
 
 def generate_sudoku():
 
-    board_states = []
+    states = []
     board = [[make_cell() for _ in range(9)] for _ in range(9)]
-    
+    backtrack(board, states)
+    return [[board[row][column]["answer"] for column in range(9)] for row in range(9)]
+
+
