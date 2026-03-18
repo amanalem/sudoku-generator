@@ -109,3 +109,11 @@ def set_cell(board, row, column):
     propagate(board, row, column, answer)
     return answer
 
+def has_conflict(board):
+    for row in range(9):
+        for column in range(9):
+            cell = board[row][column]
+            if cell["answer"] is None and cell["numOfOptions"]() == 1:
+                return True
+    return False
+
