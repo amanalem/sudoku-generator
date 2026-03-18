@@ -138,7 +138,7 @@ def backtrack(board, states):
     options = board[row][column]["options"][:]
     random.shuffle(options)
     for option in options:
-        save_state(board)
+        save_state(board, states)
         make_guess(board, row, column, option)
         if backtrack(board, states):
             return True
@@ -154,4 +154,7 @@ def generate_sudoku():
     backtrack(board, states)
     return [[board[row][column]["answer"] for column in range(9)] for row in range(9)]
 
-
+if __name__ == "__main__":
+    puzzle = generate_sudoku()
+    for row in puzzle:
+        print(row)
