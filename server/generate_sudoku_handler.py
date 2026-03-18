@@ -117,3 +117,12 @@ def has_conflict(board):
                 return True
     return False
 
+def save_state(board):
+    return [[{"options": cell["options"][:], "answer": cell["answer"]} for cell in row] for row in board]
+
+def restore_state(board, state):
+    for row in range(9):
+        for column in range(9):
+            board[row][column]["options"] = state[row][column]["options"][:]
+            board[row][column]["answer"] = state[row][column]["answer"]
+            
