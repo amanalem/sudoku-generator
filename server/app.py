@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from server.generate_sudoku_handler import *
+from generate_sudoku_handler import generate_sudoku
 
 app = Flask(__name__)
 CORS(app) #allows React App to talk to Flask
