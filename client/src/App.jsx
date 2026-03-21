@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
+import EmptyGrid from "./components/EmptyGrid";
+import SudokuGrid from "./components/SudokuGrid";
 
 function App() {
   const [puzzle, setPuzzle] = useState(null);
@@ -38,39 +40,8 @@ function App() {
       >
         {loading ? "Generate Puzzle" : "Generate Puzzle"}
       </button>
+      {emptyGrid && <EmptyGrid emptyGrid={emptyGrid} />}
       {puzzle && <SudokuGrid puzzle={puzzle} />}
-    </div>
-  );
-}
-
-function SudokuGrid({ puzzle }) {
-  return (
-    <div className="grid">
-      {puzzle.map((row, rowIndex) => (
-        <div key={rowIndex} className="row">
-          {row.map((cell, colIndex) => (
-            <div key={colIndex} className="cell">
-              {cell}
-            </div>
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function EmptyGrid({ emptyGrid }) {
-  return (
-    <div className="grid">
-      {emptyGrid.map((row, rowIndex) => (
-        <div key={rowIndex} className="row">
-          {row.map((cell, colIndex) => (
-            <div key={colIndex} className="cell">
-              {cell}
-            </div>
-          ))}
-        </div>
-      ))}
     </div>
   );
 }
