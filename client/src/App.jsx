@@ -5,14 +5,16 @@ import "./App.css";
 function App() {
   const [puzzle, setPuzzle] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [emptyGrid, setEmptyGrid] = useState(true);
 
   const fetchPuzzle = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/puzzle");
+      const res = await axios.get("http://localhost:8080/api/puzzle");
+      setEmptyGrid(false);
       setPuzzle(res.data.puzzle);
     } catch (error) {
-      console.error("Error fetching puzzle: ", error);
+      console.error("Error fetching puzzle:", error);
     }
     setLoading(false);
   };
@@ -21,7 +23,7 @@ function App() {
     <div className="app">
       <h1>Sudoku Generator</h1>
       <button onClick={fetchPuzzle} disabled={loading}>
-        {loading ? "Generating..." : "Generate Puzzle"}
+        {loading ? "Generate Puzzle" : "Generate Puzzle"}
       </button>
       {puzzle && <SudokuGrid puzzle={puzzle} />}
     </div>
