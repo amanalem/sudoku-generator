@@ -145,7 +145,7 @@ def backtrack(board, states):
         restore_state(board, states)
     return False
 
-        
+      
 
 def generate_sudoku():
 
