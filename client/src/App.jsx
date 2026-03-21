@@ -34,7 +34,7 @@ function App() {
     <div className="app">
       <h1>Sudoku Generator</h1>
       <button
-        onBeforeInput={fetchEmptyGrid}
+        
         onClick={fetchPuzzle}
         disabled={loading}
       >
