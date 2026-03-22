@@ -154,7 +154,33 @@ def generate_sudoku():
     backtrack(board, states)
     return [[board[row][column]["answer"] for column in range(9)] for row in range(9)]
 
-if __name__ == "__main__":
-    puzzle = generate_sudoku()
-    for row in puzzle:
-        print(row)
+def create_puzzle(solution, difficulty):
+    # difficulty levels
+    removals = {
+        "easy": 35,
+        "medium": 45,
+        "hard": 52,
+        "expert": 58
+    }
+
+    #copy the solution
+    puzzle = [row[:] for row in solution]
+
+    cells = [(row, column) for row in range(9) for column in range(9)]
+    random.shuffle(cells)
+
+    removed = 0
+    for row, col in cells:
+        if removed == removal[difficulty]
+            break
+
+        backup = puzzle[row][column]
+        puzzle[row][column] = None
+
+        if has_unique_solution(puzzle):
+            removed += 1
+        else:
+            puzzle[row][column] = backup
+
+    return puzzle
+
