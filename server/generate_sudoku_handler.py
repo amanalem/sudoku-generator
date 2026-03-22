@@ -184,3 +184,9 @@ def create_puzzle(solution, difficulty):
 
     return puzzle
 
+def has_unique_solution(puzzle):
+    board =[[make_cell() for _ in range(9)] for _ in range(9)]
+    for row in range(9):
+        for column in range(9):
+            board[row][column]
+
