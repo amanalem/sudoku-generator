@@ -7,7 +7,7 @@ import SudokuGrid from "./components/SudokuGrid";
 function App() {
   const [puzzle, setPuzzle] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [emptyGrid, setEmptyGrid] = useState(null);
+  const [emptyGrid, setEmptyGrid] = useState(true);
 
   const fetchPuzzle = async () => {
     setLoading(true);
@@ -22,13 +22,10 @@ function App() {
   };
 
   const fetchEmptyGrid = async () => {
-    try {
-      const res = await axios.get("http://localhost:8080/api/puzzle");
-      setEmptyGrid(res.data.blank);
-    } catch (error) {
-      console.error("Error fetching blank puzzle:", error);
-    }
-  };
+    setPuzzle(null)
+    setEmptyGrid(true)
+  }
+
 
   return (
     <div className="app">
@@ -38,10 +35,11 @@ function App() {
         onClick={fetchPuzzle}
         disabled={loading}
       >
-        {loading ? "Generate Puzzle" : "Generate Puzzle"}
+        {loading ? "Generate Solution" : "Generate Solution"}
       </button>
-      {emptyGrid && <EmptyGrid emptyGrid={emptyGrid} />}
+      {emptyGrid && <EmptyGrid/>}
       {puzzle && <SudokuGrid puzzle={puzzle} />}
+      <button onClick={fetchEmptyGrid}>{"Clear Grid"}</button>
     </div>
   );
 }
