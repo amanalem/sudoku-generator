@@ -191,7 +191,7 @@ def has_unique_solution(puzzle):
             if puzzle[row][column] is not None:
                 board[row][column]["answer"] = puzzle[row][column]
                 board[row][column]["options"] = [puzzle[row][column]]
-                propagate(board, row, col, puzzle[row][column])
+                propagate(board, row, column, puzzle[row][column])
 
     solutions = count_solutions(board, 0)
     return solutions == 1            
@@ -220,3 +220,17 @@ def count_solutions(board, count):
         restore_state(board, states)
 
     return count
+
+if __name__ == "__main__":
+    solution = generate_sudoku()
+    print("Solution:")
+    for row in solution:
+        print(row)
+
+    puzzle = create_puzzle(solution, 'medium')
+
+    print("\nPuzzle:")
+    for row in puzzle:
+        print(row)
+
+        
