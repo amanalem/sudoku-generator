@@ -170,7 +170,7 @@ def create_puzzle(solution, difficulty):
     random.shuffle(cells)
 
     removed = 0
-    for row, col in cells:
+    for row, column in cells:
         if removed == removal[difficulty]
             break
 
@@ -188,5 +188,35 @@ def has_unique_solution(puzzle):
     board =[[make_cell() for _ in range(9)] for _ in range(9)]
     for row in range(9):
         for column in range(9):
-            board[row][column]
+            if puzzle[row][column] is not None:
+                board[row][column]["answer"] = puzzle[row][column]
+                board[row][column]["options"] = [puzzle[row][column]]
+                propagate(board, row, col, puzzle[row][column])
 
+    solutions = count_solutions(board, 0)
+    return solutions == 1            
+
+def count_solutions(board, count):
+    find_all_singles(board)
+
+    if has_conflict(board):
+        return count
+
+    if count_solved(board) == 81:
+        return count + 1
+
+    if count > 1:
+        return count
+
+    cell = find_best_cell(board)
+    row, column = cell
+    options = board[row][column]["options"][:]
+
+    for option in options:
+        states = []
+        save_state(board, states)
+        make_guess(board, row, column, option)
+        count = count_solutions(board, count)
+        restore_state(board, states)
+
+    return count
