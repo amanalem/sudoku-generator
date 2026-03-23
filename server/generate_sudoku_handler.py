@@ -171,7 +171,7 @@ def create_puzzle(solution, difficulty):
 
     removed = 0
     for row, column in cells:
-        if removed == removals[difficulty]
+        if removed == removals[difficulty]:
             break
 
         backup = puzzle[row][column]
