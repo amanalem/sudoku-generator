@@ -13,7 +13,7 @@ function App() {
   const fetchPuzzle = async (difficulty) => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:8080/api/puzzle?difficulty=${difficulty}");
+      const res = await axios.get(`http://localhost:8080/api/puzzle?difficulty=${difficulty}`);
       setEmptyGrid(null);
       setPuzzle(res.data.puzzle);
       setSolution(res.data.solution)
