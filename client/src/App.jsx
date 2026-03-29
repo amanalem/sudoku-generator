@@ -13,7 +13,7 @@ function App() {
   const fetchPuzzle = async (difficulty) => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:8080/api/puzzle?difficulty=${difficulty}');
+      const res = await axios.get("http://localhost:8080/api/puzzle?difficulty=${difficulty}");
       setEmptyGrid(null);
       setPuzzle(res.data.puzzle);
       setSolution(res.data.solution)
@@ -32,18 +32,12 @@ function App() {
   return (
     <div className="app">
       <h1>Sudoku Generator</h1>
-      <button
-        
-        onClick={() => fetchPuzzle('easy')}
-        disabled={loading}
-      >
-        Easy
-      </button>
-      <button onClick={() => fetchPuzzle('medium')}>Medium</button>
-      <button onClick={() => fetchPuzzle('hard')}>Hard</button>
-      <button onClick={() => fetchPuzzle('expert')}>Expert</button>
+      <button onClick={() => fetchPuzzle("easy")}>Easy</button>
+      <button onClick={() => fetchPuzzle("medium")}>Medium</button>
+      <button onClick={() => fetchPuzzle("hard")}>Hard</button>
+      <button onClick={() => fetchPuzzle("expert")}>Expert</button>
       {emptyGrid && <EmptyGrid/>}
-      {puzzle && <SudokuGrid puzzle={puzzle} />}
+      {puzzle && <SudokuGrid puzzle={puzzle} solution={solution}/>}
       <button onClick={fetchEmptyGrid}>Clear Grid</button>
     </div>
   );
