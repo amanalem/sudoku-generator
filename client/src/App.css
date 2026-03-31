@@ -44,8 +44,8 @@ button {
   color: white;
   border: none;
   border-radius: 5px;
-  margin-top: 10px;
   float: inline-start;
+  margin: 10px 3px 0px;
 }
 
 button:hover {
