@@ -32,10 +32,12 @@ function App() {
   return (
     <div className="app">
       <h1>Sudoku Generator</h1>
-      <button onClick={() => fetchPuzzle("easy")}>Easy</button>
-      <button onClick={() => fetchPuzzle("medium")}>Medium</button>
-      <button onClick={() => fetchPuzzle("hard")}>Hard</button>
-      <button onClick={() => fetchPuzzle("expert")}>Expert</button>
+      <div>
+        <button onClick={() => fetchPuzzle("easy")}>Easy</button>
+        <button onClick={() => fetchPuzzle("medium")}>Medium</button>
+        <button onClick={() => fetchPuzzle("hard")}>Hard</button>
+        <button onClick={() => fetchPuzzle("expert")}>Expert</button>
+      </div>
       {emptyGrid && <EmptyGrid/>}
       {puzzle && <SudokuGrid puzzle={puzzle} solution={solution}/>}
       <button onClick={fetchEmptyGrid}>Clear Grid</button>

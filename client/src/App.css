@@ -45,6 +45,7 @@ button {
   border: none;
   border-radius: 5px;
   margin-top: 10px;
+  float: inline-start;
 }
 
 button:hover {
