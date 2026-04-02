@@ -37,6 +37,7 @@ function App() {
         <button onClick={() => fetchPuzzle("medium")}>Medium</button>
         <button onClick={() => fetchPuzzle("hard")}>Hard</button>
         <button onClick={() => fetchPuzzle("expert")}>Expert</button>
+        <button onClick={() => fetchPuzzle("master")}>Master</button>
       </div>
       {emptyGrid && <EmptyGrid/>}
       {puzzle && <SudokuGrid puzzle={puzzle} solution={solution}/>}
