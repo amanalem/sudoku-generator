@@ -161,7 +161,7 @@ def create_puzzle(solution, difficulty):
         "medium": 45,
         "hard": 52,
         "expert": 58,
-        "master": 61,
+        "master": 60,
     }
 
     #copy the solution
